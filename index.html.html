@@ -1,0 +1,282 @@
+import React, { useState } from 'react';
+import { 
+  Heart, 
+  Search, 
+  Image as ImageIcon, 
+  CheckCircle, 
+  Calendar, 
+  Star, 
+  Cat, 
+  Sprout, 
+  Rabbit, 
+  Gamepad2, 
+  ChevronDown, 
+  ChevronUp,
+  Lightbulb,
+  Upload,
+  Award
+} from 'lucide-react';
+
+const MiniProject = () => {
+  const [activeStep, setActiveStep] = useState(null);
+
+  const toggleStep = (index) => {
+    if (activeStep === index) {
+      setActiveStep(null);
+    } else {
+      setActiveStep(index);
+    }
+  };
+
+  const topics = [
+    { id: 1, name: "Thú Cưng", icon: <Cat size={32} />, color: "bg-orange-100 text-orange-600", border: "border-orange-200" },
+    { id: 2, name: "Cây Cảnh", icon: <Sprout size={32} />, color: "bg-green-100 text-green-600", border: "border-green-200" },
+    { id: 3, name: "Vật Nuôi", icon: <Rabbit size={32} />, color: "bg-pink-100 text-pink-600", border: "border-pink-200" },
+    { id: 4, name: "Đồ Vật Yêu Thích", icon: <Gamepad2 size={32} />, color: "bg-blue-100 text-blue-600", border: "border-blue-200" },
+  ];
+
+  const steps = [
+    {
+      title: "Bước 1: Chọn người bạn đồng hành",
+      icon: <Heart />,
+      desc: "Con hãy chọn một chủ đề mà con yêu thích nhất (Thú cưng, Cây cảnh, Vật nuôi, hoặc Đồ chơi).",
+      details: "Khoanh tròn vào phiếu học tập chủ đề con chọn."
+    },
+    {
+      title: "Bước 2: Viết câu thần chú (Prompt)",
+      icon: <Lightbulb />,
+      desc: "Mô tả người bạn đó cho AI hiểu.",
+      details: (
+        <div className="space-y-2">
+          <p>Con có thể tự viết hoặc chọn mẫu:</p>
+          <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+            <li>"Một chú chó màu vàng đang chơi bóng"</li>
+            <li>"Một chậu cây xanh đặt bên cửa sổ"</li>
+            <li>"Một chú mèo dễ thương đang nằm ngủ"</li>
+            <li>"Một món đồ chơi robot đặt trên bàn"</li>
+          </ul>
+        </div>
+      )
+    },
+    {
+      title: "Bước 3: Nhờ AI vẽ tranh",
+      icon: <ImageIcon />,
+      desc: "Nhập câu thần chú vào Gemini để xem điều kỳ diệu.",
+      details: "Gõ câu lệnh vào máy tính. Chọn bức tranh con thấy giống ý tưởng của con nhất."
+    },
+    {
+      title: "Bước 4: Tự chấm điểm",
+      icon: <CheckCircle />,
+      desc: "Kiểm tra xem tranh có đúng ý con chưa.",
+      details: "Tranh có đúng chủ đề không? Có đẹp không? Nếu chưa ưng ý, con hãy sửa lại câu thần chú nhé!"
+    },
+    {
+      title: "Bước 5: Nộp bài",
+      icon: <Upload />,
+      desc: "Lưu tranh và gửi lên Padlet của lớp.",
+      details: "Tải ảnh về máy (đuôi .png hoặc .jpg). Nộp lên link Padlet cô giáo gửi."
+    }
+  ];
+
+  const rubrics = [
+    { name: "Chọn đúng chủ đề", desc: "Tranh vẽ đúng là con vật/đồ vật con đã chọn.", stars: 3 },
+    { name: "Câu lệnh (Prompt)", desc: "Viết được câu mô tả rõ ràng, đầy đủ chi tiết (màu sắc, hành động).", stars: 3 },
+    { name: "Sản phẩm cuối cùng", desc: "Hình ảnh đẹp, rõ nét, giống với ý tưởng ban đầu của con.", stars: 3 },
+  ];
+
+  return (
+    <div className="min-h-screen bg-yellow-50 font-sans text-gray-800">
+      {/* Header Banner */}
+      <header className="bg-gradient-to-r from-blue-400 to-purple-500 text-white p-6 rounded-b-[40px] shadow-lg relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+          <div className="absolute top-4 left-10 transform rotate-12"><Star size={64} /></div>
+          <div className="absolute bottom-4 right-10 transform -rotate-12"><Heart size={64} /></div>
+        </div>
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <div className="inline-block bg-white/20 px-4 py-1 rounded-full text-sm font-bold mb-2 uppercase tracking-wide">
+            Mini Project 1
+          </div>
+          <h1 className="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">
+            Chăm Sóc <br className="md:hidden" /> Người Bạn Yêu Mến
+          </h1>
+          <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto">
+            Cùng sử dụng trí tuệ nhân tạo (AI) để vẽ nên người bạn thân thiết của em!
+          </p>
+        </div>
+      </header>
+
+      <main className="max-w-4xl mx-auto px-4 py-8 space-y-12">
+        
+        {/* Section 1: Introduction */}
+        <section className="bg-white rounded-3xl p-6 shadow-md border-b-4 border-blue-200">
+          <div className="flex items-start gap-4">
+            <div className="bg-blue-100 p-3 rounded-full text-blue-600 hidden md:block">
+              <Search size={32} />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-blue-600 mb-3">Câu chuyện của chúng mình</h2>
+              <p className="text-gray-600 leading-relaxed text-lg">
+                Trong cuộc sống, em luôn có những "người bạn" đặc biệt như thú cưng, cây cảnh hay đồ chơi. 
+                Dự án này sẽ giúp em biến những ý tưởng trong đầu thành bức tranh thật đẹp nhờ vào người trợ lý AI tài ba!
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 2: Topics */}
+        <section>
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-purple-600">Em sẽ chọn người bạn nào?</h2>
+            <p className="text-gray-500">Hãy chọn 1 trong 4 chủ đề dưới đây nhé</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {topics.map((topic) => (
+              <div key={topic.id} className={`flex flex-col items-center justify-center p-4 rounded-2xl border-2 ${topic.color} ${topic.border} shadow-sm transform transition hover:scale-105 cursor-pointer`}>
+                <div className="mb-2">{topic.icon}</div>
+                <span className="font-bold text-center">{topic.name}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Section 3: Timeline & Tasks */}
+        <section className="bg-white rounded-3xl p-6 shadow-md border-b-4 border-green-200">
+          <h2 className="text-2xl font-bold text-green-600 mb-6 flex items-center gap-2">
+            <Calendar /> Thời Gian & Nhiệm Vụ
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-8 relative">
+             {/* Connector Line (Desktop) */}
+            <div className="hidden md:block absolute left-1/2 top-10 bottom-10 w-1 bg-green-100 -translate-x-1/2 rounded-full"></div>
+
+            {/* Lesson 1 */}
+            <div className="relative z-10">
+              <div className="bg-green-50 p-5 rounded-2xl border-2 border-green-100 h-full">
+                <div className="bg-green-500 text-white w-20 text-center py-1 rounded-full text-sm font-bold mb-3 mx-auto md:mx-0">
+                  Tiết 1
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2 text-center md:text-left">Chuẩn bị</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2 text-gray-700">
+                    <CheckCircle size={20} className="text-green-500 mt-1 shrink-0" />
+                    <span>Chọn chủ đề yêu thích.</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-gray-700">
+                    <CheckCircle size={20} className="text-green-500 mt-1 shrink-0" />
+                    <span>Viết "câu thần chú" (Prompt) đơn giản.</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-gray-700">
+                    <CheckCircle size={20} className="text-green-500 mt-1 shrink-0" />
+                    <span>Chỉnh sửa câu lệnh cho hay hơn.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Lesson 2 */}
+            <div className="relative z-10">
+              <div className="bg-purple-50 p-5 rounded-2xl border-2 border-purple-100 h-full">
+                 <div className="bg-purple-500 text-white w-20 text-center py-1 rounded-full text-sm font-bold mb-3 mx-auto md:mx-0">
+                  Tiết 2
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2 text-center md:text-left">Thực hiện</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2 text-gray-700">
+                    <CheckCircle size={20} className="text-purple-500 mt-1 shrink-0" />
+                    <span>Dùng Gemini tạo hình ảnh.</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-gray-700">
+                    <CheckCircle size={20} className="text-purple-500 mt-1 shrink-0" />
+                    <span>Tự đánh giá tranh của mình.</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-gray-700">
+                    <CheckCircle size={20} className="text-purple-500 mt-1 shrink-0" />
+                    <span>Nộp bài lên Padlet.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 4: The Process (Accordion) */}
+        <section>
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
+            <span className="bg-yellow-200 px-4 py-1 rounded-full">Hành Trình 5 Bước</span>
+          </h2>
+          <div className="space-y-4">
+            {steps.map((step, index) => (
+              <div 
+                key={index} 
+                className={`bg-white rounded-2xl shadow-sm border-2 overflow-hidden transition-all duration-300 ${activeStep === index ? 'border-blue-400 ring-2 ring-blue-100' : 'border-gray-100'}`}
+              >
+                <button 
+                  onClick={() => toggleStep(index)}
+                  className="w-full flex items-center justify-between p-5 text-left focus:outline-none hover:bg-gray-50"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={`p-3 rounded-full ${activeStep === index ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-500'}`}>
+                      {step.icon}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-800">{step.title}</h3>
+                      <p className="text-sm text-gray-500 md:hidden">{step.desc}</p>
+                    </div>
+                  </div>
+                  {activeStep === index ? <ChevronUp className="text-blue-500" /> : <ChevronDown className="text-gray-400" />}
+                </button>
+                
+                {activeStep === index && (
+                  <div className="px-5 pb-5 pt-0 ml-16 md:ml-20 animate-fadeIn">
+                     <p className="text-gray-600 mb-3 font-medium hidden md:block">{step.desc}</p>
+                     <div className="bg-blue-50 p-4 rounded-xl text-blue-800 text-sm">
+                       <strong>Chi tiết: </strong> {step.details}
+                     </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Section 5: Evaluation (Gamified Rubric) */}
+        <section className="bg-white rounded-3xl p-8 shadow-lg border-t-8 border-yellow-400">
+          <div className="text-center mb-8">
+             <div className="inline-block p-3 bg-yellow-100 rounded-full text-yellow-600 mb-3">
+               <Award size={40} />
+             </div>
+             <h2 className="text-2xl font-bold text-gray-800">Làm sao để đạt điểm cao?</h2>
+             <p className="text-gray-500">Hãy cố gắng thu thập thật nhiều sao nhé!</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {rubrics.map((rubric, idx) => (
+              <div key={idx} className="bg-yellow-50 rounded-2xl p-5 text-center border border-yellow-100 flex flex-col items-center">
+                <h3 className="font-bold text-lg text-yellow-800 mb-2">{rubric.name}</h3>
+                <p className="text-sm text-gray-600 mb-4 flex-grow">{rubric.desc}</p>
+                <div className="flex gap-1">
+                  {[...Array(rubric.stars)].map((_, i) => (
+                     <Star key={i} size={24} className="fill-yellow-400 text-yellow-400 drop-shadow-sm" />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 p-4 bg-gray-50 rounded-xl text-sm text-gray-500 text-center">
+             <span className="font-bold">Công cụ sử dụng:</span> Google Gemini (để tạo ảnh) và Padlet (để nộp bài).
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="text-center pb-8">
+          <p className="text-gray-400 font-medium">Chúc các em có những tác phẩm thật tuyệt vời!</p>
+          <p className="text-xs text-gray-300 mt-2">© Vinschool AI Project</p>
+        </footer>
+
+      </main>
+    </div>
+  );
+};
+
+export default MiniProject;
